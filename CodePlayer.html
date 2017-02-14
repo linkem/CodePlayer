@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Code Player</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <style>
+      body,html{
+          margin: 0;
+          padding: 0;
+          height: 100%;
+      }
+      header{
+          height: 40px;
+          border-bottom: 1px solid #BFBFBF;
+          border-top: 1px solid #BFBFBF;
+          background-color: #EEEEEE;
+      }
+      #page-title{
+          margin: 2px 0px 2px 10px;
+          padding: 0;
+          float: left;
+      }
+
+      #header-button-container{
+          width: 300px;
+          margin:5px auto;
+          margin-top: 2px;
+          margin-bottom: 3px;
+      }
+      .header-button{ 
+          float: left;
+          border-left: 1px solid #BFBFBF;
+          border-bottom: 1px solid #BFBFBF;
+          border-top: 1px solid #BFBFBF;
+          border-right: none;
+          background-color: #F5F9FF;
+          height: 35px;          
+      }
+      .header-button:focus {
+          outline:0;
+      }
+      .header-button:hover{
+          background-color: #E5E5E5;
+      }      
+      #html-button{
+          border-bottom-left-radius: 5px;
+          border-top-left-radius: 5px;
+      }
+      #output-button{
+          border-right: 1px solid #BFBFBF;
+          border-bottom-right-radius: 5px;
+          border-top-right-radius: 5px;
+      }
+      
+      
+      
+      .container {
+         width: 100%;
+         height: 100%;
+         border: 1px solid black;
+         display: table;
+         table-layout: fixed;
+      }
+      .code-container{
+          margin: 0px;
+          padding: 0px;
+          height: 100%;
+          //border: 1px solid #BFBFBF;
+          display: table-cell;
+
+      }
+
+      textarea{
+          margin: 0px;
+          padding: 0px;
+          width: 100%;
+          height: 100%;
+          font-size: 80%;
+          resize: none;
+          background-color: #F7F7F7;
+          font-family: "MS Sans Serif", monospace;
+      }
+      textarea:focus{
+          background-color: #FFFFFF;
+          outline:0;
+      }
+      #output-iframe{
+          width: 100%;
+          height: 100%;
+          margin: 0px;
+          padding: 0px;
+          border: none;
+      }
+  </style>
+</head>
+<body>
+<header>
+    <h1 id="page-title">Code Player</h1>
+    <div id="header-button-container">
+        
+        <button type="toggle" class="header-button" id="html-button">HTML</button>
+        <button type="toggle" class="header-button" id="css-button">CSS</button>
+        <button type="toggle" class="header-button" id="javascript-button">JavaScript</button>
+        <button type="toggle" class="header-button" id="output-button">Output</button>
+    </div>
+</header>
+<div class="container">
+    <div class="code-container" id="html-container">
+        <textarea id="html-input" type="text"></textarea>
+    </div>
+    <div class="code-container" id="css-container">
+        <textarea id="css-input"type="text"></textarea>
+    </div>
+    <div class="code-container" id="javascript-container">
+        <textarea id="javascript-input"type="text"></textarea>
+    </div>
+    <div class="code-container" id="output-container">
+        <iframe id="output-iframe" src="created_page/created-page.html"></iframe>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    //html-button
+    $("#html-button").click(function(){
+        if($("#html-container").css("display")=="table-cell"){
+            $("#html-container").css("display","none");
+            $("#html-button").css("background-color", "#EEEEEE");
+            $("#html-button").css("font-weight", "bold");
+        }
+        else{
+            $("#html-container").css("display","table-cell")
+            $("#html-button").css("background-color", "#F5F9FF")
+            $("#html-button").css("font-weight", "normal");
+        }
+    });
+    //css-button
+    $("#css-button").click(function(){
+        if($("#css-container").css("display")=="table-cell"){
+            $("#css-container").css("display","none");
+            $("#css-button").css("background-color", "#EEEEEE");
+        }
+        else{
+            $("#css-container").css("display","table-cell")
+            $("#css-button").css("background-color", "#F5F9FF")
+        }
+    })
+    //javaScript-button
+    $("#javascript-button").click(function(){
+        if($("#javascript-container").css("display")=="table-cell"){
+            $("#javascript-container").css("display","none");
+            $("#javascript-button").css("background-color", "#EEEEEE");
+        }
+        else{
+            $("#javascript-container").css("display","table-cell")
+            $("#javascript-button").css("background-color", "#F5F9FF")
+        }
+    })
+    //output-button
+    $("#output-button").click(function(){
+        if($("#output-container").css("display")=="table-cell"){
+            $("#output-container").css("display","none");
+            $("#output-button").css("background-color", "#EEEEEE");
+        }
+        else{
+            $("#output-container").css("display","table-cell")
+            $("#output-button").css("background-color", "#F5F9FF")
+        }
+    })
+    $.get("created_page/created-page.html", function(data){
+        $("#html-input").val(data);
+    });
+    $.get("created_page/created-page-css.css", function(data){
+        $("#css-input").val(data);
+    });
+    $.get("created_page/created-page-javascript.js", function(data){
+        $("#javascript-input").val(data);
+    });
+</script> 
+    
+</body>
+</html>
